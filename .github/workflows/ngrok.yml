@@ -31,6 +31,5 @@ jobs:
           sudo wget -O /isos/driver.iso https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.240-1/virtio-win-0.1.240.iso &>/dev/null &
           while ps axg | grep -vw grep | grep -w wget > /dev/null; do sleep 1; done
           wget https://raw.githubusercontent.com/ubuntu2310fake/ActionDocker/main/compose.yaml
-          tailscale ip -4
           echo "thanh cong, ket noi bang port 8006 o trinh duyet Chrome"
           sudo docker compose up
