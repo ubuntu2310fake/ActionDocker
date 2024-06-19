@@ -20,8 +20,6 @@ jobs:
       - name: cài win và khởi chạy
         run: |
           sudo chmod 666 /dev/kvm
-          sudo qemu-img create -f qcow2 /mnt/a.qcow2 60G
-          sudo qemu-img create -f raw a.img 20G
           sudo mkdir /isos/
           sudo wget -O /isos/a.iso "${{ github.event.inputs.link_iso }}" &>/dev/null &
           while ps axg | grep -vw grep | grep -w wget > /dev/null; do sleep 1; done
