@@ -1,0 +1,33 @@
+name: Tailscale - Docker
+
+on: 
+  workflow_dispatch:
+    inputs:
+      link_iso:
+        description: 'dán link iso của ae vô đây'
+        required: true
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: chuẩn bị phần mềm
+        run: |
+          sudo apt update -y
+          sudo apt install wget curl -y
+          curl -fsSL https://tailscale.com/install.sh | sh
+          sudo tailscale up
+      - name: cài win và khởi chạy
+        run: |
+          sudo chmod 666 /dev/kvm
+          sudo qemu-img create -f qcow2 /mnt/a.qcow2 60G
+          sudo qemu-img create -f raw a.img 20G
+          sudo mkdir /isos/
+          sudo wget -O /isos/a.iso "${{ github.event.inputs.link_iso }}" &>/dev/null &
+          while ps axg | grep -vw grep | grep -w wget > /dev/null; do sleep 1; done
+          sudo wget -O /isos/driver.iso https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.240-1/virtio-win-0.1.240.iso &>/dev/null &
+          while ps axg | grep -vw grep | grep -w wget > /dev/null; do sleep 1; done
+          wget https://raw.githubusercontent.com/ubuntu2310fake/ActionDocker/main/compose.yaml
+          tailscale ip -4
+          echo "thanh cong, ket noi bang port 8006 o trinh duyet Chrome"
+          sudo docker compose up
