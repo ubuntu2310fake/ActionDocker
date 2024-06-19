@@ -6,6 +6,7 @@ services:
       RAM_SIZE: "8G"
       CPU_CORES: "4"
       DISK_TYPE: "ide"
+      ARGUMENTS: "-drive file=/driver.iso,media=cdrom"
     devices:
       - /dev/kvm
     cap_add:
@@ -17,4 +18,5 @@ services:
     volumes:
       - /tmp:/storage
       - /isos/a.iso:/custom.iso
+      - /isos/driver.iso:/driver.iso
     stop_grace_period: 2m
