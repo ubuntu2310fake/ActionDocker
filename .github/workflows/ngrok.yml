@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       ngrok:
-        description: 'ngrok auth token'
+        description: '2i8F6mJFCvUAJFYdSmbrheFnE1G_5x2EM1b9k5tNsuvvTaF1W'
         required: true
       link_iso:
         description: 'dán link iso của ae vô đây'
