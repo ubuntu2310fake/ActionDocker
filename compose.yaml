@@ -2,11 +2,11 @@ services:
   windows:
     image: dockurr/windows
     environment:
-      DISK_SIZE: "64G"
-      RAM_SIZE: "8G"
-      CPU_CORES: "4"
+      DISK_SIZE: "25G"
+      RAM_SIZE: "2G"
+      CPU_CORES: "2"
       DISK_TYPE: "ide"
-      ARGUMENTS: "-drive file=/driver.iso,media=cdrom"
+      VERSION: "win8"
     devices:
       - /dev/kvm
     cap_add:
@@ -16,7 +16,5 @@ services:
       - 3389:3389/tcp
       - 3389:3389/udp
     volumes:
-      - /mnt:/storage
-      - /isos/a.iso:/custom.iso
-      - /isos/driver.iso:/driver.iso
+      - /root/ActionDocker:/storage
     stop_grace_period: 2m
